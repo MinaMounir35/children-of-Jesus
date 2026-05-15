@@ -3690,8 +3690,8 @@ function manageMemberTrips(memberId) {
         return;
     }
 
-    let html = '<div style="max-height:60vh; overflow-y:auto;">';
-    html += '<h4 style="margin-bottom:16px; color:#1a237e;"><i class="fas fa-bus"></i> إدارة رحلات ' + m.name + '</h4>';
+    let html = `<div style="max-height:60vh; overflow-y:auto;">
+        <h4 style="margin-bottom:16px; color:#1a237e;"><i class="fas fa-bus"></i> إدارة رحلات ${m.name}</h4>`;
 
     serviceTrips.forEach(t => {
         const memberIds = normalizeTripMembers(t.members);
@@ -3707,22 +3707,22 @@ function manageMemberTrips(memberId) {
         } else if (isFullyPaid) {
             status = '<span style="color:#388e3c;">مدفوع كامل</span>';
         } else {
-            status = '<span style="color:#e65100;">متبقي: ' + remaining + ' جنيه</span>';
+            status = `<span style="color:#e65100;">متبقي: ${remaining} جنيه</span>`;
         }
 
-        html += '<div style="border:1px solid #ddd; border-radius:8px; padding:12px; margin-bottom:10px; background:#fafafa;">';
-        html += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">';
-        html += '<strong>' + t.name + '</strong>';
-        html += status;
-        html += '</div>';
+        html += `<div style="border:1px solid #ddd; border-radius:8px; padding:12px; margin-bottom:10px; background:#fafafa;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <strong>${t.name}</strong>
+                ${status}
+            </div>`;
 
         if (joined) {
-            html += '<div style="display:flex; gap:8px; flex-wrap:wrap;">';
-            html += '<button class="btn btn-accent btn-sm" onclick="openTripPayFromMember(\'' + memberId + '\',\'' + t.id + '\')"><i class="fas fa-coins"></i> تعديل الدفع</button>';
-            html += '<button class="btn btn-danger btn-sm" onclick="cancelTripSubscription(\'' + memberId + '\',\'' + t.id + '\')"><i class="fas fa-times-circle"></i> إلغاء الاشتراك</button>';
-            html += '</div>';
+            html += `<div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn btn-accent btn-sm" onclick="openTripPayFromMember('${memberId}','${t.id}')"><i class="fas fa-coins"></i> تعديل الدفع</button>
+                <button class="btn btn-danger btn-sm" onclick="cancelTripSubscription('${memberId}','${t.id}')"><i class="fas fa-times-circle"></i> إلغاء الاشتراك</button>
+            </div>`;
         } else {
-            html += '<button class="btn btn-primary btn-sm" style="width:100%;" onclick="openTripPayFromMember(\'' + memberId + '\',\'' + t.id + '\', true)"><i class="fas fa-user-plus"></i> اشتراك بالرحلة</button>';
+            html += `<button class="btn btn-primary btn-sm" style="width:100%;" onclick="openTripPayFromMember('${memberId}','${t.id}', true)"><i class="fas fa-user-plus"></i> اشتراك بالرحلة</button>`;
         }
 
         html += '</div>';
